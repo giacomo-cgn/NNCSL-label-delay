@@ -17,7 +17,7 @@
 
 </div>
 
-Official PyTorch implementation of our ICCV 2023 paper "[A soft nearest-neighbor framework for continual semi-supervised learning](https://arxiv.org/abs/2212.05102)". 
+Official PyTorch implementation of our ICCV 2023 paper for semi-supervised continual learning "[A soft nearest-neighbor framework for continual semi-supervised learning](https://arxiv.org/abs/2212.05102)". 
 
 Our proposed NNCSL（**N**earest-**N**eighbor for **C**ontinual **S**emi-supervised **L**earning) is composed of a continual semi-supervised learner **CSL** and a distillation loss **NND**.
 
