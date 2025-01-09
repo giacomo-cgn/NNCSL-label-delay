@@ -4,3 +4,5 @@ experiments/
 output/
 src/nncsl_train_reservoir.py
 .idea/
+temp/
+__pycache__/

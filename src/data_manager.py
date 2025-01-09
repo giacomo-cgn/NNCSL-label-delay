@@ -480,6 +480,7 @@ def _init_cifar100_data(
     if tasks is not None:
         if visible_class_ul is None:
             visible_class_ul = tasks[task_idx]
+        # print('classes used for usnsup:', visible_class_ul)
         indexes = [i for i, c in enumerate(unsupervised_set.targets) if c in visible_class_ul]
         # Sample a subset of unlabeled data for the case of current_seen
         num_unlab = int(len(indexes)) #/ len(visible_class_ul))

@@ -55,7 +55,7 @@ optimization:
   weight_decay: 1.0e-05
 continual:
   num_tasks: 10
-  setting: current
+  setting: anticipate
   mask: true
   buffer_size: 500
   detach: false

@@ -167,6 +167,7 @@ def main(args):
     mask = args['continual']['mask'] # Filtering
     detach = args['continual']['detach'] # if false: use Linear evaluation head
     buffer_size = args['continual']['buffer_size'] # Buffer size 
+
     # ----------------------------------------------------------------------- #
 
     # -- init torch distributed backend
@@ -338,6 +339,13 @@ def main(args):
             visible_class_ul = tasks[task_idx]
         elif cl_setting == 'all':
             visible_class_ul = sum(tasks, [])
+        elif cl_setting == 'anticipate':
+            if task_idx == num_tasks-1:
+                # Last task takes 1st task unsup samples
+                visible_class_ul == tasks[0]
+            else:
+                # All other tasks takes next task unsup samples
+                visible_class_ul = tasks[task_idx+1]
         else:
             raise ValueError('unknown setting!')
         # -- assume support images are sampled with ClassStratifiedSampler
@@ -493,7 +501,7 @@ def main(args):
             cur_lr = optimizer.param_groups[0]['lr']
             cur_lr_cls = optimizer.param_groups[-1]['lr']
 
-            for itr, udata in enumerate(unsupervised_loader):
+            for itr, udata in enumerate(tqdm(unsupervised_loader)):
                 def make_one_hot_label(slabels, num_class):
                     total_images = slabels.shape[0]
                     labels = torch.zeros(total_images, num_class).to(device)
